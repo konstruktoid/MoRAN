@@ -65,7 +65,7 @@ $cursordown = $coll->find($query_down);
 
 <?php
 if (!empty($_POST['search'])){
-	$post_search = $_POST['search'];
+	$post_search = cleanString($_POST['search']);
 	$query_search = array('name' => $post_search);
 	$unit = $coll->findOne($query_search);
 	$count = $coll->count(array('name'=> $post_search));
@@ -77,7 +77,6 @@ if (!empty($_POST['search'])){
 	echo "<div id=\"search\">";
 	if (!empty($name)) {
 	echo "<form method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\">";
-	echo "<input type=\"hidden\" value=\"$id\" name=\"uid\">";
 	echo "name: <input name=\"uname\" value=\"$name\" class=\"minput\"><br />\n";
 	echo "vendor: <input name=\"uvendor\" value=\"$vendor\" class=\"minput\"><br />\n";
 	echo "status: <input name=\"ustatus\" value=\"$status\" class=\"minput\"><br />\n";
@@ -89,25 +88,25 @@ if (!empty($_POST['search'])){
 	echo "comment: <input name=\"ucomment\" value=\"$comment\" class=\"minput\">";
 	echo "<br /><input type=\"submit\" name=\"update\" value=\"Upsert\" class=\"button\">";
 	} else {
-		echo "No result for <i>$post_search</i><br />\n";
+		echo "No result for <i>" . cleanOutput($post_search) . "</i><br />\n";
 	}
 	echo "<button type=\"reset\" class=\"button\" onClick=\"document.getElementById('search').style.display = 'none';\">Close</button>";
 	echo "</form>";
 	echo "</div>";
 }
 
-if (isset($_POST['uname']) && !empty($_POST['uname'])){
+if (isset($_POST['uname']) && !empty(cleanString($_POST['uname']))){
 	echo "<div id=\"upsert\">";
-	$id = $_POST['uid'];
-	$uname = $_POST['uname'];
-	$uvendor = $_POST['uvendor'];
-	$ustatus = $_POST['ustatus'];
-	if (!empty($_POST['ucomment'])){
-                $ucomment = $_POST['ucomment'];
+	$uname = cleanString($_POST['uname']);
+	$uvendor = cleanString($_POST['uvendor']);
+	$ustatus = cleanString($_POST['ustatus']);
+	if (!empty(cleanString($_POST['ucomment']))){
+                $ucomment = cleanString($_POST['ucomment']);
         } else {
                 $ucomment = "";
 	}
-
+		
+		$save = "1";
         if (empty($uvendor) || $uvendor != "cisco"){
                 echo "Incorrect vendor: $uvendor<br />";
 		$save = "0";
@@ -134,10 +133,10 @@ if (isset($_POST['uname']) && !empty($_POST['uname'])){
 }
 
 if (isset($_POST['upsertcommit'])){
-	$upsertname = $_POST['upsertname'];
-	$upsertvendor = $_POST['upsertvendor'];
-	$upsertstatus = $_POST['upsertstatus'];
-	$upsertcomment = $_POST['upsertcomment'];
+	$upsertname = cleanString($_POST['upsertname']);
+	$upsertvendor = cleanString($_POST['upsertvendor']);
+	$upsertstatus = cleanString($_POST['upsertstatus']);
+	$upsertcomment = cleanString($_POST['upsertcomment']);
 	
 	echo "<div id=\"upsert\">";
 	$upsert_unit = $coll->update(
@@ -197,3 +196,4 @@ foreach ($cursordown as $unit){
 </div>
 </body>
 </html>
+
