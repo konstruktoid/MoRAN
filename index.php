@@ -10,8 +10,12 @@ User should only have minimal permissions on the specific database
 php.ini : https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/web/php.ini
 */
 
-$m = new MongoClient();
-$db = $m->selectDB("rancid");
+$dbusername = "rancidrw";
+$dbpassword = "rancidrwpassword";
+$database = "rancid";
+
+$m = new MongoClient("mongodb://$dbusername:$dbpassword@localhost/$database?ssl=true");
+$db = $m->selectDB("$database");
 $coll = $db->net;
 
 $query_up = array('status' => 'up');
