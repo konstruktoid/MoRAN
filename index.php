@@ -4,6 +4,10 @@
 konstruktoid.net 
 Mo(ngoDB)RAN(CID) web interface
 I am not a web developer
+
+Username and password should actually be an enviroment variable
+User should only have minimal permissions on the specific database
+php.ini : https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/web/php.ini
 */
 
 $m = new MongoClient();
