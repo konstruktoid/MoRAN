@@ -18,6 +18,25 @@ $m = new MongoClient("mongodb://$dbusername:$dbpassword@localhost/$database?ssl=
 $db = $m->selectDB("$database");
 $coll = $db->net;
 
+function cleanString($string){
+	$string_clean = array();
+	
+	$string = preg_replace('/[^a-zA-Z0-9---. ]/', '', $string);
+	$string = (string)$string;
+	$string_clean['message'] = $string;
+
+	return $string_clean['message'];
+}
+
+function cleanOutput($string){
+    	$output_clean = array();
+    
+    	$output_string = htmlentities($string, ENT_QUOTES, 'UTF-8');
+    
+	$output_clean['message'] = $output_string;
+    	return $output_clean['message'];
+}
+
 $query_up = array('status' => 'up');
 $cursorup = $coll->find($query_up);
 
