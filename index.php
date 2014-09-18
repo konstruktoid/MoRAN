@@ -44,20 +44,19 @@ $query_down = array('status' => 'down');
 $cursordown = $coll->find($query_down);
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>MoRAN</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="./moran.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./moran.css" />
 </head>
 <body>
 <div id="main">
 
 <div id="menu">
 <form method="post" action="<?php echo ($_SERVER["PHP_SELF"]);?>">
-<input name="search" size="30" class="input"></textarea>
+<input name="search" size="30" class="input">
 <input type="submit" name="send" value="Search" class="button">
 <br />
 </form>
@@ -153,7 +152,7 @@ if (isset($_POST['upsertcommit'])){
 ?>
 
 <div id="left">
-<font class="title">Up</font><br />
+<span class="title">Up</span><br />
 
 <?php
 foreach ($cursorup as $unit){
@@ -174,7 +173,7 @@ foreach ($cursorup as $unit){
 </div>
 
 <div id="right">
-<font class="title">Down</font><br />
+<span class="title">Down</span><br />
 
 <?php
 foreach ($cursordown as $unit){
@@ -196,4 +195,3 @@ foreach ($cursordown as $unit){
 </div>
 </body>
 </html>
-
